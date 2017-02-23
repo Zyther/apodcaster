@@ -1,0 +1,48 @@
+<!-- Login Page
+---- Written by:
+------ Zyther of      DigitalAddiction.info
+------ TheCallSign of DigitalAddiction.info
+---- Inspired by scotch.io
+-->
+
+<!doctype html>
+<html>
+<head>
+    <title>Podcaster - Login</title>
+    <% include includes.ejs %>
+   </head>
+<body>
+<div class='container-fluid'>
+    <% include navbar.ejs %>
+    <div class="container-fluid jumboColor">
+    <div class='col-sm-6-sm-offset-3'>
+        <h1><span class='fa fa-key'></span> Log In</h1>
+
+
+        <!-- If msg, alert it -->
+        <% if(message.length > 0) { %>
+        <div class='alert alert-danger'><%= message %></div>
+        <% } %>
+
+        <form action='/login' method='post'>
+            <div class='form-group'>
+                <label><span class='fa fa-envelope'></span> E-Mail</label>
+                <input type='text' class='form-control' name='email'>
+            </div>
+            <div class='form-group'>
+                <label><span class='fa fa-lock'></span> Password</label>
+                <input type='password' class='form-control' name='password'>
+            </div>
+            <button type='submit' class='btn btn-warning btn-lg'>Sign In</button>
+        </form>
+        <hr>
+
+        <p>
+            <a href='/signup'>Not Registered? Sign Up!</a> or, <a href='/'>return to homepage.</a>
+        </p>
+    </div>
+    </div>
+</div>
+</body>
+<% include scripts.ejs %>
+</html>

@@ -1,0 +1,123 @@
+<!-- Podcaster - Signup Page
+---- Written by:
+------ Zyther of        DigitalAddiction
+------ TheCallSign of   Digitaladdiction
+---- Inspired by scotch.io
+-->
+
+<!doctype html>
+<html>
+<head>
+    <title>Podcaster - Sign Up</title>
+    <% include includes.ejs %>
+    <style>
+        #complexity{}
+        #complexity.veryweak{color: #ef0000;}
+        #complexity.weak{color: #DF2500;}
+        #complexity.fair{color: #DFA200;}
+        #complexity.good{color: #9DAF00;}
+        #complexity.strong{color: #09AF00;}
+    </style>
+
+    <script>$.getScript( "https://cdn.rawgit.com/rschwietzke/yetanotherpasswordmeter/master/js/password-meter.js",
+                function(a,b,c) {
+                    $('#submit-btn').prop('disabled', true); // if loading the password strength plugin failed, enable the submit btn
+                });
+    </script>
+    <script>
+        function checkPass(password){
+            var pm = new PasswordMeter();
+            pm.checkPassword(password);
+            var complexity = pm.Complexity.value;
+            var indicator = $("#complexity");
+            console.log(indicator);
+            indicator.removeClass("veryweak weak fair good strong");
+            var allowed = false;
+            if (complexity == pm.COMPLEXITY.VERYWEAK)
+            {
+                indicator.html("Very Weak");
+                indicator.addClass("veryweak");
+            }
+            else if (complexity == pm.COMPLEXITY.WEAK)
+            {
+                indicator.html("Weak");
+                indicator.addClass("weak");
+            }
+            else if (complexity == pm.COMPLEXITY.FAIR)
+            {
+                allowed = true;
+                indicator.html("Fair");
+                indicator.addClass("fair");
+            }
+            else if (complexity == pm.COMPLEXITY.GOOD)
+            {
+                allowed = true;
+                indicator.html("Good");
+                indicator.addClass("good");
+            }
+            else if (complexity == pm.COMPLEXITY.STRONG)
+            {
+                allowed = true;
+                indicator.html("Strong");
+                indicator.addClass("strong");
+            }
+            if(allowed) {
+                $('#submit-btn').prop('disabled', false);
+            } else {
+
+                $('#submit-btn').prop('disabled', true);
+            }
+
+        }
+
+        function isEmail(email){
+            var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+            return regex.test(email);
+        }
+
+        function checkEmail(email) {
+            var pass = isEmail(email);
+            if(pass == false) {
+                $('#email-text').css("background-color","#ff6666");
+            } else {
+                $('#email-text').css("background-color","white");
+            }
+        }
+
+
+    </script>
+</head>
+<body>
+
+<div class='container'>
+    <% include navbar.ejs %>
+    <div class='col-sm-6-col-sm-offset-3'>
+        <h1><span class='fa fa-user-plus'></span> Sign Up</h1>
+
+        <% if (message.length > 0) { %>
+        <div class='alert alert-danger'><%= message %></div>
+        <% } %>
+
+        <!-- Signup Form -->
+        <form action="/signup" method="post">
+            <div class="form-group">
+                <label><span class='fa fa-envelope'></span> E-Mail</label>
+                <input type="text" class="form-control" name="email" id="email-text" onblur="checkEmail(this.value)" onfocus="checkEmail(this.value)">
+            </div>
+            <div class="form-group">
+                <label><span class='fa fa-lock'></span> Password</label>
+                <input type="password" class="form-control" name="password" onkeyup="checkPass(this.value)"> <div id="complexity" class=""></div>
+            </div>
+            <button id='submit-btn' type="submit" class="btn btn-warning btn-lg">Signup</button>
+        </form>
+        <hr>
+
+        <p>
+            Already registered? <a href='/login'>Sign In.</a>  or, <a href='/'> Go Home</a>
+        </p>
+    </div>
+</div>
+</body>
+<% include scripts.ejs %>
+
+</html>

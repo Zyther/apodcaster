@@ -1,0 +1,27 @@
+{
+  "name": "apodcaster",
+  "description": "A podcaster that doesn't suck",
+  "main": "webapp/index.html",
+  "authors": [
+    "ZytherXYZ"
+  ],
+  "license": "GPL-3.0",
+  "keywords": [
+    "podcaster"
+  ],
+  "homepage": "https://github.com/Zyther/apodcaster",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.6.2"
+  },
+  "resolutions": {
+    "bootstrap": "4"
+  }
+}
