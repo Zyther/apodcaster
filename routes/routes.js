@@ -3,11 +3,16 @@
 // Zyther 2/22/17
 
 
-var dashRoute = require("./dash/dash");
+var dashRoute   = require("./dash/dash"),
+    express     = require("express"),
+    path        = require("path"),
+    appRootDir  = require("app-root-dir").get();
+
 
 module.exports = function(app, passport){
 
     app.use("/dash", dashRoute(passport));
+    app.use("/ws", express.static(path.join(appRootDir, "/webstatics")));
 
     app.get("/login", function(req, res, next){
         if (req.isAuthenticated()){

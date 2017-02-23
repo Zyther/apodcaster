@@ -61,7 +61,7 @@ module.exports = function(passport){
                 }
                 if (user) {
                     // cant use a used email
-                    return done(null, false, req.flash('signupMessage', 'Email is already taken. Please use another, or log in if this is your account.'));
+                    return done(null, false, req.flash('loginMessage', 'Email is already taken. Please use another, or log in if this is your account.'));
                 } else {
                     // no user with that email, continue
                     var newUser = new User();

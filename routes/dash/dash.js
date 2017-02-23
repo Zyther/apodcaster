@@ -11,11 +11,13 @@ var appRootDir = require('app-root-dir').get();
 
 module.exports = function(passport) {
     router.use(isLoggedIn);
-
     router.use("/", express.static(path.join(appRootDir + "/srcwebapp")));
 
     return router;
 };
+
+
+
 function isLoggedIn(req,res,next){
     if (req.isAuthenticated()) {
         return next();
