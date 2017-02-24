@@ -8,4 +8,8 @@ theApp.config(function($stateProvider, $urlRouterProvider){
 
 });
 
-
+theApp.controller("cNav", function($scope){
+    $scope.log = function(){
+        console.log("this worked");
+    };
+});
